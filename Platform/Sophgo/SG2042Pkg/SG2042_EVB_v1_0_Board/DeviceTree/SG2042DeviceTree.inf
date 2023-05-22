@@ -1,0 +1,43 @@
+## @file
+#
+#  Device tree description of the Hifive Unleashed platform
+#
+#  Copyright (c) 2021, Hewlett Packard Enterprise Development LP. All rights reserved.
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  INF_VERSION    = 0x0001001A
+  BASE_NAME      = U540DeviceTree
+  FILE_GUID      = 25462CDA-221F-47DF-AC1D-259CFAA4E326 # gDtPlatformDefaultDtbFileGuid
+  MODULE_TYPE    = USER_DEFINED
+  VERSION_STRING = 1.0
+
+[Sources]
+  gpio.h
+  input.h
+  irq.h
+  linux-event-codes.h
+  # mango-2sockets.dtsi
+  mango-clock-socket0.dtsi
+  # mango-clock-socket1.dtsi
+  mango-cpus-socket0.dtsi
+  # mango-cpus-socket1.dtsi
+  # mango-milkv-pioneer.dts
+  # mango-pcie-2rc.dtsi
+  # mango-pcie-3rc-v2.dtsi
+  mango-pcie-3rc.dtsi
+  # mango-pcie-4rc.dtsi
+  mango-pinctrl.dtsi
+  # mango-sophgo-pisces.dts
+  # mango-sophgo-x4evb.dts
+  mango-sophgo-x8evb.dts
+  mango.dtsi
+  sophgo-mango-clock.h
+  sophgo-mango-resets.h
+  sophgo.h
+
+[Packages]
+  MdePkg/MdePkg.dec
