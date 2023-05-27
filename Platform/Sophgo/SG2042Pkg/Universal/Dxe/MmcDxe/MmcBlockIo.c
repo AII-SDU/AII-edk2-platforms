@@ -404,6 +404,14 @@ MmcIoBlocks (
       ConsumeSize = BytesRemainingToBeTransfered;
     }
 
+    if(ConsumeSize > 0x1D00000)
+    {
+      ConsumeSize = 0x1D00000;
+      BlockCount = 0xE800;
+    }
+    else
+      BlockCount = ConsumeSize / This->Media->BlockSize;
+
     MmioWrite16(0x704002B000 + 0x04, This->Media->BlockSize);
     MmioWrite16(0x704002B000 + 0x06, BlockCount);
 

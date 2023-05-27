@@ -287,10 +287,11 @@ int fdt_reserved_memory_fixup(void *fdt)
 	struct sbi_domain_memregion *reg;
 	struct sbi_domain *dom = sbi_domain_thishart_ptr();
 	struct sbi_scratch *scratch = sbi_scratch_thishart_ptr();
-	// unsigned long filtered_base[PMP_COUNT] = { 0 };
-	// unsigned char filtered_order[PMP_COUNT] = { 0 };
+	unsigned long filtered_base[PMP_COUNT];
+	memset(filtered_base, 0, PMP_COUNT);
+	unsigned char filtered_order[PMP_COUNT] = { 0 };
 	unsigned long addr, size;
-	int err, parent, i;
+	int err, parent, i, j;
 	int na = fdt_address_cells(fdt, 0);
 	int ns = fdt_size_cells(fdt, 0);
 
@@ -361,12 +362,30 @@ int fdt_reserved_memory_fixup(void *fdt)
 			return SBI_ENOSPC;
 		}
 
-		// bool overlap = false;
+		bool overlap = false;
 		addr = reg->base;
-		size = 1UL << reg->order;
-		fdt_resv_memory_update_node(fdt, addr, size, i, parent,
-			(sbi_hart_pmp_count(scratch)) ? false : true);
-		i++;
+		for (j = 0; j < i; j++) {
+			if (addr == filtered_base[j]
+			    && filtered_order[j] < reg->order) {
+				overlap = true;
+				filtered_order[j] = reg->order;
+				break;
+			}
+		}
+
+		if (!overlap) {
+			filtered_base[i] = reg->base;
+			filtered_order[i] = reg->order;
+			i++;
+		}
+	}
+
+	for (j = 0; j < i; j++) {
+		addr = filtered_base[j];
+		size = 1UL << filtered_order[j];
+		fdt_resv_memory_update_node(fdt, addr, size, j, parent,
+					    (sbi_hart_pmp_count(scratch))
+					    ? false : true);
 	}
 
 	return 0;
