@@ -682,38 +682,6 @@
 			reg-io-width = <4>;
 		};
 
-		spifmc0: flash-controller@7000180000 {
-			compatible = "sophgo,spifmc";
-			reg = <0x70 0x00180000 0x0 0x1000000>;
-			reg-names = "memory";
-			#address-cells = <1>;
-			#size-cells = <0>;
-			interrupt-parent = <&intc>;
-			interrupts = <SOC_PERIPHERAL_IRQ(108) IRQ_TYPE_LEVEL_HIGH>;
-			clock-frequency = <100000000>;
-			clocks = <&div_clk GATE_CLK_AHB_SF>;
-			flash@0 {
-				reg = <0>;
-				compatible = "gigadevice,gd25lb512me", "jedec,spi-nor";
-			};
-		};
-
-		spifmc1: flash-controller@7002180000 {
-			compatible = "sophgo,spifmc";
-			reg = <0x70 0x02180000 0x0 0x1000000>;
-			reg-names = "memory";
-			#address-cells = <1>;
-			#size-cells = <0>;
-			interrupt-parent = <&intc>;
-			interrupts = <SOC_PERIPHERAL_IRQ(109) IRQ_TYPE_LEVEL_HIGH>;
-			clock-frequency = <100000000>;
-			clocks = <&div_clk GATE_CLK_AHB_SF>;
-			flash@0 {
-				reg = <0>;
-				compatible = "gigadevice,gd25lb512me", "jedec,spi-nor";
-			};
-		};
-
 		emmc: bm-emmc@704002A000 {
 			compatible = "bitmain,bm-emmc";
 			reg = <0x70 0x4002A000 0x0 0x1000>;
@@ -828,13 +796,14 @@
 		};
 	};
 
-	intc1: top_intc {
+	intc1: top_intc@7030010300 {
 		compatible = "sophgo,top-intc";
 		reg = <0x70 0x300102E0 0x0 0x4>,
 		      <0x70 0x30010300 0x0 0x4>,
 		      <0x70 0x30010304 0x0 0x4>;
 		reg-names = "sta", "set", "clr";
 		reg-bitwidth = <32>;
+		top_intc_id = <0>;
 		interrupt-controller;
 		#interrupt-cells = <0x1>; // only applies to child node
 		for-msi;

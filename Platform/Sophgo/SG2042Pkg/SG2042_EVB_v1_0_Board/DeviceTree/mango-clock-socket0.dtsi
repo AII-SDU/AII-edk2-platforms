@@ -55,7 +55,7 @@
 		div_clk: div_clk {
 			compatible = "mango, pll-child-clock";
 			#clock-cells = <1>;
-            id = <S0_DIV_CLK_TABLE>;
+			id = <S0_DIV_CLK_TABLE>;
 			subctrl-syscon = <&top_misc>;
 		};
 

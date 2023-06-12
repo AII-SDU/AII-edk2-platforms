@@ -10,16 +10,16 @@
 DEFINE BLOCK_SIZE        = 0x1000
 
 DEFINE FW_BASE_ADDRESS   = 0x00000000
-DEFINE FW_SIZE           = 0x00900000
-DEFINE FW_BLOCKS         = 0x900
+DEFINE FW_SIZE           = 0x00800000
+DEFINE FW_BLOCKS         = 0x800
 
 #
 # 0x000000-0x7DFFFF code
 # 0x7E0000-0x800000 variables
 #
 DEFINE CODE_BASE_ADDRESS = 0x00000000
-DEFINE CODE_SIZE         = 0x00800000
-DEFINE CODE_BLOCKS       = 0x800
+DEFINE CODE_SIZE         = 0x00700000
+DEFINE CODE_BLOCKS       = 0x700
 DEFINE VARS_BLOCKS       = 0x20
 
 #
@@ -38,8 +38,8 @@ DEFINE ROOT_FW_DOMAIN_SIZE = $(SECFV_SIZE)
 # FW memory region
 #
 DEFINE PEIFV_OFFSET                  = 0x00400000
-DEFINE PEIFV_SIZE                    = 0x00180000
-DEFINE FVMAIN_OFFSET                 = 0x00580000
+DEFINE PEIFV_SIZE                    = 0x00080000
+DEFINE FVMAIN_OFFSET                 = 0x00480000
 DEFINE FVMAIN_SIZE                   = 0x00280000
 
 #
@@ -47,23 +47,23 @@ DEFINE FVMAIN_SIZE                   = 0x00280000
 # The total size of EFI Variable FD must include
 # all of sub regions of EFI Variable
 #
-DEFINE VARS_OFFSET                   = 0x00800000
+DEFINE VARS_OFFSET                   = 0x00700000
 DEFINE VARS_SIZE                     = 0x00007000
-DEFINE VARS_FTW_WORKING_OFFSET       = 0x00807000
+DEFINE VARS_FTW_WORKING_OFFSET       = 0x00707000
 DEFINE VARS_FTW_WORKING_SIZE         = 0x00001000
-DEFINE VARS_FTW_SPARE_OFFSET         = 0x00808000
+DEFINE VARS_FTW_SPARE_OFFSET         = 0x00708000
 DEFINE VARS_FTW_SPARE_SIZE           = 0x00018000
 
 #
 # Device Tree memory region
 #
-DEFINE DTB_OFFSET                    = 0x00840000
+DEFINE DTB_OFFSET                    = 0x00740000
 DEFINE DTB_SIZE                      = 0x00030000
 
 #
 # Scratch area memory region
 #
-DEFINE SCRATCH_OFFSET                = 0x00880000
+DEFINE SCRATCH_OFFSET                = 0x00780000
 DEFINE SCRATCH_SIZE                  = 0x00040000
 
 
@@ -95,16 +95,15 @@ SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootHartId                  = 0      
 #
 # The bootable hart number the platform would like to use during boot.
 #
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartNumber          = 1
+SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartNumber          = 64
 #
 # Only use hart ID 1, 2, 3, 4
 #
-SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartIndexToId       =  {0x0}
-# SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartIndexToId       = {0x0,0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,0xa,0xb,0xc,0xd,0xe,0xf,0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1a,0x1b,0x1c,0x1d,0x1e,0x1f,0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,0x2a,0x2b,0x2c,0x2d,0x2e,0x2f,0x30,0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x3a,0x3b,0x3c,0x3d,0x3e,0x3f}
+# SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartIndexToId       =  {0x0}
+SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdBootableHartIndexToId       = {0x0,0x1,0x2,0x3,0x4,0x5,0x6,0x7,0x8,0x9,0xa,0xb,0xc,0xd,0xe,0xf,0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1a,0x1b,0x1c,0x1d,0x1e,0x1f,0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,0x2a,0x2b,0x2c,0x2d,0x2e,0x2f,0x30,0x31,0x32,0x33,0x34,0x35,0x36,0x37,0x38,0x39,0x3a,0x3b,0x3c,0x3d,0x3e,0x3f}
                                                                                     # during boot
-SET gSophgoSG2042PlatformsPkgTokenSpaceGuid.PcdNumberofU5Cores       = 1         # Total U5 cores enabled on U540 platform
+SET gSophgoSG2042PlatformsPkgTokenSpaceGuid.PcdNumberofU5Cores       = 64         # Total U5 cores enabled on U540 platform
 SET gSophgoSG2042PlatformsPkgTokenSpaceGuid.PcdE5MCSupported         = True       # E51 MC exists.
-# SET gSophgoSG2042PlatformsPkgTokenSpaceGuid.PcdU5UartBase            = 0x7040000000 # Serial port base address
 SET gUefiRiscVPlatformPkgTokenSpaceGuid.PcdPeiCorePrivilegeMode        = 1          # Set PeiCore to S-Mode
 
 SET gEfiMdeModulePkgTokenSpaceGuid.PcdSerialRegisterBase               = 0x7040000000
