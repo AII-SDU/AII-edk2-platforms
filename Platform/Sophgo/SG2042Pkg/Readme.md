@@ -123,11 +123,3 @@ phase for U540 platform initialization.
 |PcdU5UartBase|Platform serial port base address|
 
 
-## Platform Owners
-Chang, Abner <abner.chang@hpe.com>
-Chen, Gilbert <gilbert.chen@hpe.com>
-Schaefer, Daniel <daniel.schaefer@hpe.com>
-
-
-
-`````````````````````````````````````````````````````````````
