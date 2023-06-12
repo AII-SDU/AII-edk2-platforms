@@ -13,7 +13,7 @@
 # Build the variable store and the firmware code as one unified flash device
 # image.
 #
-[FD.U540]
+[FD.SG2042]
 BaseAddress   = $(FW_BASE_ADDRESS)
 Size          = $(FW_SIZE)
 ErasePolarity = 1
